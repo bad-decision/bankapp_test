@@ -13,35 +13,35 @@ pipeline {
                 stage('Account Service') {
                     steps {
                         dir('.') {
-                            sh 'gradle :account-service:clean :account-service:build'
+                            sh 'gradlew :account-service:clean :account-service:build'
                         }
                     }
                 }
                 stage('Blocker Service') {
                     steps {
                         dir('.') {
-                            sh 'gradle :blocker-service:clean :blocker-service:build'
+                            sh 'gradlew :blocker-service:clean :blocker-service:build'
                         }
                     }
                 }
                 stage('Cash Service') {
                     steps {
                         dir('.') {
-                            sh 'gradle :cash-service:clean :cash-service:build'
+                            sh 'gradlew :cash-service:clean :cash-service:build'
                         }
                     }
                 }
                 stage('Exchange-generator Service') {
                     steps {
                         dir('.') {
-                            sh 'gradle :exchange-generator-service:clean :exchange-generator-service:build'
+                            sh 'gradlew :exchange-generator-service:clean :exchange-generator-service:build'
                         }
                     }
                 }
                 stage('Exchange Service') {
                     steps {
                         dir('.') {
-                            sh 'gradle :exchange-service:clean :exchange-service:build'
+                            sh 'gradlew :exchange-service:clean :exchange-service:build'
                         }
                     }
                 }
@@ -55,14 +55,14 @@ pipeline {
                 stage('Notification Service') {
                     steps {
                         dir('.') {
-                            sh 'gradle :notification-service:clean :notification-service:build'
+                            sh 'gradlew :notification-service:clean :notification-service:build'
                         }
                     }
                 }
                 stage('Transfer Service') {
                     steps {
                         dir('.') {
-                            sh 'gradle :transfer-service:clean :transfer-service:build'
+                            sh 'gradlew :transfer-service:clean :transfer-service:build'
                         }
                     }
                 }
