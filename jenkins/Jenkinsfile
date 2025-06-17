@@ -13,7 +13,7 @@ pipeline {
                 stage('Account Service') {
                     steps {
                         dir('.') {
-                            sh '../gradlew :account-service:clean :account-service:build'
+                            sh '../gradle :account-service:clean :account-service:build'
                         }
                     }
                 }
