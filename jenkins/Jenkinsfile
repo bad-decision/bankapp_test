@@ -12,9 +12,7 @@ pipeline {
             parallel {
                 stage('Account Service') {
                     steps {
-                        dir('.') {
-                            sh '../gradle :account-service:clean :account-service:build'
-                        }
+                        sh './gradlew :account-service:clean :account-service:build'
                     }
                 }
                 stage('Blocker Service') {
