@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG       = "${env.BUILD_NUMBER}"
     }
 
-//     stages {
+    stages {
 //         stage('Build & Unit Tests') {
 //             parallel {
 //                 stage('Account Service') {
