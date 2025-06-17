@@ -106,10 +106,11 @@ pipeline {
                 withCredentials([string(credentialsId: 'GHCR_TOKEN', variable: 'GHCR_TOKEN')]) {
                     sh """
                         kubectl create secret docker-registry ghcr-secret \
-                          --docker-server=ghcr.io \
+                          --docker-server=$DOCKER_REGISTRY \
                           --docker-username=$GITHUB_USERNAME \
                           --docker-password=$GHCR_TOKEN \
-                          --namespace=test
+                          --namespace=test \
+                          --dry-run=client -o yaml | kubectl apply -f -
 
                         helm upgrade --install bankapp bankapp-chart \\
                           --namespace test --create-namespace \\
