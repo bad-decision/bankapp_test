@@ -12,7 +12,8 @@ pipeline {
             parallel {
                 stage('Account Service') {
                     steps {
-                        sh 'gradle :account-service:clean :account-service:build'
+                        sh 'chmod +x gradlew'
+                        sh './gradlew :account-service:clean :account-service:build'
                     }
                 }
                 stage('Blocker Service') {
