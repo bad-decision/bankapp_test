@@ -105,25 +105,30 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'GHCR_TOKEN', variable: 'GHCR_TOKEN')]) {
                     sh """
-                    echo \$GHCR_TOKEN | docker login ghcr.io -u ${GITHUB_USERNAME} --password-stdin
-                    helm upgrade --install bankapp bankapp-chart \\
-                      --namespace test --create-namespace \\
-                      --set account-service.image.repository=${DOCKER_REGISTRY}/account-service \\
-                      --set account-service.image.tag=${IMAGE_TAG} \\
-                      --set blocker-service.image.repository=${DOCKER_REGISTRY}/blocker-service \\
-                      --set blocker-service.image.tag=${IMAGE_TAG} \\
-                      --set cash-service.image.repository=${DOCKER_REGISTRY}/cash-service \\
-                      --set cash-service.image.tag=${IMAGE_TAG} \\
-                      --set exchange-generator-service.image.repository=${DOCKER_REGISTRY}/exchange-generator-service \\
-                      --set exchange-generator-service.image.tag=${IMAGE_TAG} \\
-                      --set exchange-service.image.repository=${DOCKER_REGISTRY}/exchange-service \\
-                      --set exchange-service.image.tag=${IMAGE_TAG} \\
-                      --set notification-service.image.repository=${DOCKER_REGISTRY}/notification-service \\
-                      --set notification-service.image.tag=${IMAGE_TAG} \\
-                      --set transfer-service.image.repository=${DOCKER_REGISTRY}/transfer-service \\
-                      --set transfer-service.image.tag=${IMAGE_TAG} \\
-                      --set front-service.image.repository=${DOCKER_REGISTRY}/front-service \\
-                      --set front-service.image.tag=${IMAGE_TAG} \\
+                        kubectl create secret docker-registry ghcr-secret \
+                          --docker-server=ghcr.io \
+                          --docker-username=$GITHUB_USERNAME \
+                          --docker-password=$GHCR_TOKEN \
+                          --namespace=test
+
+                        helm upgrade --install bankapp bankapp-chart \\
+                          --namespace test --create-namespace \\
+                          --set account-service.image.repository=${DOCKER_REGISTRY}/account-service \\
+                          --set account-service.image.tag=${IMAGE_TAG} \\
+                          --set blocker-service.image.repository=${DOCKER_REGISTRY}/blocker-service \\
+                          --set blocker-service.image.tag=${IMAGE_TAG} \\
+                          --set cash-service.image.repository=${DOCKER_REGISTRY}/cash-service \\
+                          --set cash-service.image.tag=${IMAGE_TAG} \\
+                          --set exchange-generator-service.image.repository=${DOCKER_REGISTRY}/exchange-generator-service \\
+                          --set exchange-generator-service.image.tag=${IMAGE_TAG} \\
+                          --set exchange-service.image.repository=${DOCKER_REGISTRY}/exchange-service \\
+                          --set exchange-service.image.tag=${IMAGE_TAG} \\
+                          --set notification-service.image.repository=${DOCKER_REGISTRY}/notification-service \\
+                          --set notification-service.image.tag=${IMAGE_TAG} \\
+                          --set transfer-service.image.repository=${DOCKER_REGISTRY}/transfer-service \\
+                          --set transfer-service.image.tag=${IMAGE_TAG} \\
+                          --set front-service.image.repository=${DOCKER_REGISTRY}/front-service \\
+                          --set front-service.image.tag=${IMAGE_TAG} \\
                     """
                 }
             }
