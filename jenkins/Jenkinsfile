@@ -19,7 +19,7 @@ pipeline {
                 stage('Blocker Service') {
                     steps {
                         dir('.') {
-                            sh './gradlew :notification-service:checkstyleMain --stacktrace --debug :blocker-service:clean :blocker-service:build'
+                            sh './gradlew :blocker-service:clean :blocker-service:build'
                         }
                     }
                 }
